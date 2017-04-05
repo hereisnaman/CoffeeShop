@@ -6,16 +6,18 @@ import java.util.Scanner;
 public class coffeeshop {
     private int top;
     private coffee drink[];
-    private double vat;
-    private double servicetax;
-    private double cess;
+    private tax tax;
 
     public coffeeshop()
     {
+        try {
+            tax = new tax();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
         top=4;
-        vat=12.5;
-        servicetax=5.0;
-        cess=3.0;
         drink=new coffee[10];
         drink[0]=new coffee("Cafe Americano",75,1);
         drink[1]=new coffee("Cafe Latte",78,2);
@@ -24,48 +26,9 @@ public class coffeeshop {
         drink[4]=new coffee("Espresso",90,5);
     }
 
-    public void setVat(double vat) throws Exception
+    public tax getTax()
     {
-        if(vat>=0)
-            this.vat=vat;
-        else
-            throw new Exception("Invalid vat");
-    }
-
-    public double getVat()
-    {
-        return this.vat;
-    }
-
-    public void setServiceTax(double servicetax) throws Exception
-    {
-        if(servicetax>=0)
-            this.servicetax=servicetax;
-        else
-            throw new Exception("Invalid servicetax");
-    }
-
-    public double getServiceTax()
-    {
-        return this.servicetax;
-    }
-
-    public void setCess(double cess) throws Exception
-    {
-        if(cess>=0)
-            this.cess=cess;
-        else
-            throw new Exception("Invalid cess");
-    }
-
-    public double getCess()
-    {
-        return this.cess;
-    }
-
-    public double getAmount(double amount)
-    {
-        return (getVat()+getServiceTax()+getCess()+100)*amount/100;
+        return this.tax;
     }
     public boolean isEmpty()
     {
@@ -154,10 +117,15 @@ public class coffeeshop {
     {
         System.out.println();
         System.out.println("###################### THE COFFEE SHOP ######################");
-        System.out.println("Vat           : "+this.getVat()+"%");
-        System.out.println("Service Tax   : "+this.getServiceTax()+"%");
-        System.out.println("Cess          : "+this.getCess()+"%");
+        System.out.println("Vat           : "+this.tax.getVat()+"%");
+        System.out.println("Service Tax   : "+this.tax.getServiceTax()+"%");
+        System.out.println("Cess          : "+this.tax.getCess()+"%");
     }
+    public double getAmount(double amount)
+    {
+        return (this.getTax().getVat()+this.getTax().getServiceTax()+this.getTax().getCess()+100)*amount/100;
+    }
+
     public void bill(boolean isLucky)
     {
         Scanner scn=new Scanner(System.in);
@@ -210,9 +178,9 @@ public class coffeeshop {
         }
         amount-=discount;
         System.out.println("Discounted Price   : Rs"+amount);
-        System.out.println("Vat           "+this.getVat()+"%: Rs"+this.getVat()*amount/100);
-        System.out.println("Service Tax    "+this.getServiceTax()+"%: Rs"+this.getServiceTax()*amount/100);
-        System.out.println("Cess           "+this.getCess()+"%: Rs"+this.getCess()*amount/100);
+        System.out.println("Vat           "+this.getTax().getVat()+"%: Rs"+this.getTax().getVat()*amount/100);
+        System.out.println("Service Tax    "+this.getTax().getServiceTax()+"%: Rs"+this.getTax().getServiceTax()*amount/100);
+        System.out.println("Cess           "+this.getTax().getCess()+"%: Rs"+this.getTax().getCess()*amount/100);
         System.out.println("Total Price        : Rs"+this.getAmount(amount));
         System.out.println("######################    THANK YOU    ######################");
     }

@@ -32,21 +32,17 @@ public class main {
         }
     }
 
-    public static void customer()
-    {
+    public static void customer() {
         displaymenu();
         System.out.println("We have the following offers for you:");
         System.out.println("1) Rs50 off on Rs500+ purchase.\n2) Rs100 off on Rs750+ purchase.\n3) Lucky Draw: 50% off.");
         System.out.println("Want to buy something? (yes/no)");
-        if(scn.next().equals("yes"))
-        {
+        if (scn.next().equals("yes")) {
             System.out.println("");
             System.out.print("Enter your name: ");
             shop.bill(isLucky(scn.next()));
         }
     }
-
-
 
     public static boolean isLucky(String name)
     {
@@ -226,7 +222,7 @@ public class main {
             case 1:
                 try {
                     System.out.print("Enter Vat: ");
-                    shop.setVat(scn.nextDouble());
+                    shop.getTax().setVat(scn.nextDouble());
                 }
                 catch (Exception e)
                 {
@@ -238,7 +234,7 @@ public class main {
             case 2:
                 try {
                     System.out.print("Enter Service Tax: ");
-                    shop.setServiceTax(scn.nextDouble());
+                    shop.getTax().setServiceTax(scn.nextDouble());
                 }
                 catch (Exception e)
                 {
@@ -250,7 +246,7 @@ public class main {
             case 3:
                 try {
                     System.out.print("Enter Cess: ");
-                    shop.setCess(scn.nextDouble());
+                    shop.getTax().setCess(scn.nextDouble());
                 }
                 catch (Exception e)
                 {
