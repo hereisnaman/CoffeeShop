@@ -6,16 +6,37 @@ public class coffee {
     private int price;
     private int icode;
 
-    public coffee()
+    public coffee(coffeeshop shop)
     {
-
+        this("Sample",0,0,shop);
     }
 
-    public coffee(String name, int price, int icode)
+    public coffee(String name, int price, int icode,coffeeshop shop)
     {
-        this.name=name;
-        this.price=price;
-        this.icode=icode;
+        try {
+            this.setName(name);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            return;
+        }
+        try {
+            this.setPrice(price);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            return;
+        }
+        try {
+            this.setIcode(icode,shop);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            return;
+        }
     }
 
     public void setName(String name) throws Exception
